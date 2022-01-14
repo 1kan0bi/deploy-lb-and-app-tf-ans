@@ -4,10 +4,52 @@
     - name: install nginx
       apt: 
         name: nginx 
-        state: present
+        state: present    
 
-  handlers:
     - name: start nginx
       service:
         name: nginx
-        state: started
+        state: started     
+
+    - name: Copy nginx.conf to host
+      ansible.builtin.template:
+        src: /home/kanobi/ansible/nginx.conf
+        dest: /etc/nginx/
+        owner: root
+        mode: '0644'
+
+    - name: Copy bulutovstas.devops.rebrain.srwx.net_80.j2 to host
+      ansible.builtin.template:
+        src: /home/kanobi/ansible/bulutovstas.devops.rebrain.srwx.net_80.j2
+        dest: /etc/nginx/sites-available/bulutovstas.devops.rebrain.srwx.net_80.conf
+        owner: root
+        mode: '0644'
+
+    - name: Copy bulutovstas.devops.rebrain.srwx.net_81.j2 to host
+      ansible.builtin.template:
+        src: /home/kanobi/ansible/bulutovstas.devops.rebrain.srwx.net_81.j2
+        dest: /etc/nginx/sites-available/bulutovstas.devops.rebrain.srwx.net_81.conf
+        owner: root
+        mode: '0644'
+
+    - name: Get a list of all vhosts
+      find:
+        paths: /etc/nginx/sites-available
+        patterns: "*.conf"
+        file_type: file
+      register: find
+
+    - name: Apply symlinks in sites-enabled
+      file:
+        dest: /etc/nginx/sites-enabled/{{ item.path | basename }}
+        src: "{{ item.path }}"
+        state: link
+        force: yes
+      with_items: "{{ find.files }}"
+      notify: reload nginx
+
+  handlers:
+    - name: reload nginx
+      service:
+        name: nginx
+        state: reloaded
