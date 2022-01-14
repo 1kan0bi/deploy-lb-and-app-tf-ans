@@ -1,9 +1,13 @@
 ---
 - hosts: all
   tasks:
-    - name: ensure nginx is at the latest version
-      apt: name=nginx state=latest
+    - name: install nginx
+      apt: 
+        name: nginx 
+        state: present
+
+  handlers:
     - name: start nginx
       service:
-          name: nginx
-          state: started
+        name: nginx
+        state: started
