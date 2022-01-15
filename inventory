@@ -1,6 +1,0 @@
----
-all:
-  hosts:
-    nginx_server:
-      ansible_host: bulutovstas.devops.rebrain.srwx.net
-      ansible_user: root

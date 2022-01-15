@@ -11,21 +11,34 @@
         name: nginx
         state: started     
 
+    - name: Delete default config
+      file:
+        state: absent
+        path: /etc/nginx/sites-available/default
+
+    - name: Delete sim-link default config
+      file:
+        state: absent
+        path: /etc/nginx/sites-enabled/default
+
     - name: Copy nginx.conf to host
       ansible.builtin.template:
-        src: /home/kanobi/ansible/nginx.conf
-        dest: /etc/nginx/
+        src: /home/kanobi/ansible/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
         owner: root
         mode: '0644'
+      vars:
+        worker_processes: 1
+        worker_connections: 512  
 
-    - name: Copy bulutovstas.devops.rebrain.srwx.net_80.j2 to host
+    - name: Copy bulutovstas.devops.rebrain.srwx.net_80 to host
       ansible.builtin.template:
         src: /home/kanobi/ansible/bulutovstas.devops.rebrain.srwx.net_80.j2
         dest: /etc/nginx/sites-available/bulutovstas.devops.rebrain.srwx.net_80.conf
         owner: root
         mode: '0644'
 
-    - name: Copy bulutovstas.devops.rebrain.srwx.net_81.j2 to host
+    - name: Copy bulutovstas.devops.rebrain.srwx.net_81 to host
       ansible.builtin.template:
         src: /home/kanobi/ansible/bulutovstas.devops.rebrain.srwx.net_81.j2
         dest: /etc/nginx/sites-available/bulutovstas.devops.rebrain.srwx.net_81.conf
