@@ -1,0 +1,11 @@
+---
+# handlers file for deploy_nginx
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded
+
+- name: start nginx
+  service:
+    name: nginx
+    state: started
