@@ -32,9 +32,10 @@
         dest: /etc/nginx/conf.d/{{ item }}.conf
         owner: root
         mode: '0644'
+      vars:
+        ports: ["80", "81"]
       loop:
-        - bulutovstas.devops.rebrain.srwx.net_80
-        - bulutovstas.devops.rebrain.srwx.net_81
+        - bulutovstas.devops.rebrain.srwx.net
       notify: reload nginx
 
   handlers:
