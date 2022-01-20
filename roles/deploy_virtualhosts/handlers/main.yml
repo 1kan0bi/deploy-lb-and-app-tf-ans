@@ -1,0 +1,7 @@
+---
+# handlers file for deploy_virtualhosts
+
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded

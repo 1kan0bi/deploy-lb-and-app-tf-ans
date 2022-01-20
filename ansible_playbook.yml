@@ -3,3 +3,4 @@
 
   roles:
     - deploy_nginx
+    - deploy_virtualhosts

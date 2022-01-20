@@ -14,21 +14,3 @@
     owner: root
     mode: '0644'
   notify: reload nginx
-
-- name: Delete default config and simlink
-  file:
-    state: absent
-    path: /etc/nginx/{{ item }}/default
-  loop:
-    - sites-available
-    - sites-enabled
-
-- name: Copy virtualhosts configs to host
-  template:
-    src: "{{ item }}.j2"
-    dest: /etc/nginx/conf.d/{{ item }}.conf
-    owner: root
-    mode: '0644'
-  loop:
-    - bulutovstas.devops.rebrain.srwx.net
-  notify: reload nginx
