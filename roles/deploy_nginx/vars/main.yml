@@ -1,4 +1,2 @@
 ---
 # vars file for deploy_nginx
-worker_processes: 1
-worker_connections: 512

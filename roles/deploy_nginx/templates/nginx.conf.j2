@@ -8,8 +8,10 @@ events {
 http {
     include       mime.types;
     default_type  application/octet-stream;
-    sendfile        on;
+    sendfile {{ sendfile }};
     keepalive_timeout  65;
+    tcp_nopush {{ tcp_nopush }};
+    tcp_nodelay {{ tcp_nodelay }};
 
 include /etc/nginx/conf.d/*;
 }
