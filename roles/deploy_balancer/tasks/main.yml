@@ -1,6 +1,5 @@
 ---
-# tasks file for deploy_virtualhosts
-
+# tasks file for deploy_balancer
 - name: Delete default config and simlink
   file:
     state: absent
@@ -9,13 +8,6 @@
     - sites-available
     - sites-enabled
 
-- name: Copy index.html to host
-  copy:
-    src: index.html
-    dest: /var/www/html/index.html
-    owner: root
-    mode: '0644'
-
 - name: Copy virtualhosts configs to host
   template:
     src: "{{ item }}.conf.j2"
@@ -23,6 +15,6 @@
     owner: root
     mode: '0644'
   loop:
-    - bulutovstas-app.devops.rebrain.srwx.net
+    - bulutovstas-balancer.devops.rebrain.srwx.net
   notify: reload nginx
 

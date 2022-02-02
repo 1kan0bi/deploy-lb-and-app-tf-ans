@@ -1,5 +1,10 @@
 ---
-- hosts: all
+- hosts: nginx_balancer
+
+  roles:
+    - deploy_balancer
+
+- hosts: nginx_app
 
   roles:
     - deploy_virtualhosts

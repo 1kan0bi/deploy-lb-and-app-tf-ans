@@ -1,7 +1,6 @@
-{% for port in ports %}
 server {
-        listen {{port}} default_server;
-        listen [::]:{{ port }} default_server;
+        listen {{ ports }} default_server;
+        listen [::]:{{ ports }} default_server;
 
         root /var/www/html;
         index index.html index.htm index.nginx-debian.html;
@@ -12,4 +11,3 @@ server {
                 try_files $uri $uri/ =404;
         }
 }
-{% endfor %}

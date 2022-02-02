@@ -1,0 +1,8 @@
+dependencies:
+  - role: deploy_nginx
+    vars:
+      sendfile: "on"
+      tcp_nodelay: "on"
+      tcp_nopush: "on"
+      worker_processes: 1
+      worker_connections: 512
