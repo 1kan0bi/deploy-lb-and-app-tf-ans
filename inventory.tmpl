@@ -1,9 +1,9 @@
 ---
 all:
-  hosts:
+  children:
     nginx_balancer:
-      ansible_host: ${balancer}
-      ansible_user: root
+      hosts:
+        ${balancer}
     nginx_app:
-      ansible_host: ${app}
-      ansible_user: root
+      hosts: 
+        ${app}

@@ -25,8 +25,12 @@ variable "private_ssh_key" {
   description = "Private SSH key for execute commands"
 }
 
-variable "devs" {
+variable "app" {
   type    = list(map(string))
-  default = [{ login = "bulutovstas", prefix = "balancer" }, { login = "bulutovstas", prefix = "app" }]
+  default = [{ login = "bulutovstas", prefix = "app" }, {login = "bulutovstas", prefix = "app1"}]
 }
 
+variable "lb" {
+  type    = list(map(string))
+  default = [{ login = "bulutovstas", prefix = "balancer" }, { login = "bulutovstas", prefix = "balancer1" }]
+}

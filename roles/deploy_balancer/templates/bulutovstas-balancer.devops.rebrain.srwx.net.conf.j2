@@ -1,5 +1,7 @@
 upstream app {
-server bulutovstas-app.devops.rebrain.srwx.net:80;
+{% for host in groups['nginx_app'] %}
+server {{ host }}:80;
+{% endfor %}
 }
 
 

@@ -1,2 +1,11 @@
 ---
-# handlers file for deploy_balancer
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded
+
+- name: start nginx
+  service:
+    name: nginx
+    state: started
+
